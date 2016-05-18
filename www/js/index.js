@@ -26,6 +26,7 @@
     ProfileView.prototype.template_edit = Handlebars.compile($("#edit-profile").html())
     RegistrationView.prototype.template = Handlebars.compile( $("#user-registration").html());
     ProjectView.prototype.template = Handlebars.compile( $("#project-page").html());
+    ProjectRegistrationView.prototype.template = Handlebars.compile( $( "#project-registration").html() );
 
     /* ---------------------------------- Local Variables ---------------------------------- */
     var service = new BackendService();
@@ -64,6 +65,10 @@
 
         router.addRoute('project', function() {
             $('body').html(new ProjectView(service).render().$el);
+        });
+
+        router.addRoute('new-project', function() {
+            $('body').html(new ProjectRegistrationView(service).render().$el);
         });
 
         router.addRoute('dado/:id', function(id) {

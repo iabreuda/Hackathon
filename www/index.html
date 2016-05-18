@@ -111,7 +111,7 @@
 
         <!-- Checkboxes Habilidades - USAR COMO {{> skillsCheckboxes }} -->
         <script type="text/template" id="skills-checkboxes">
-        <span class="input-group-addon" id="basic-addon1">Habilidades</span>
+        <span class="input-group-addon" id="basic-addon1">{{#unless title}} Habilidades{{/unless}}{{title}}</span>
           <div class="row">
             <div class="col-lg-3">
               <div class="input-group">
@@ -219,7 +219,7 @@
 
         <!-- Checkboxes Interesses - USAR COMO {{> interestsCheckboxes }} -->
         <script type="text/template" id="interests-checkboxes">
-          <span class="input-group-addon" id="basic-addon1">Interesses</span>
+          <span class="input-group-addon" id="basic-addon1">{{#unless title}}Interesses{{/unless}}{{title}}</span>
           <div class="row">
             <div class="col-lg-3">
               <div class="input-group">
@@ -393,7 +393,7 @@
 
         <!-- Perfil DashBoard-->
         <script type="text/template" id="dashboard">
-          <h1 class="page-title">Sugestoes</br><small>O que temos para voce!!</small></h1>
+          <h1 class="page-title">Sugestões</br><small>O que temos para você!!</small></h1>
           <div class="row">
           <div class="col-lg-6">
             <a class="dashboard dashboard-v2 blue" href="#project">
@@ -402,9 +402,10 @@
                 </div>
                 <div class="details">
                     <div class="number">
-                        <span data-counter="counterup">Reducao da Fila do Bandejao</span>
+                        <span data-counter="counterup"> Redução da Fila do Bandeijão </span>
                     </div>
                     <div class="desc"><span class="fa fa-tag"></span> Qualdidade de vida, Alimentacao, Software...</div>
+
                 </div>
             </a>
           </div>
@@ -415,9 +416,9 @@
                 </div>
                 <div class="details">
                     <div class="number">
-                        <span data-counter="counterup"> Festa de Recepcao do Caeng </span>
+                        <span data-counter="counterup"> Festa de Recepção do Caeng </span>
                     </div>
-                    <div class="desc"><span class="fa fa-tag"></span> Cultura, Integracao, Social...</div>
+                    <div class="desc"><span class="fa fa-tag"></span> Cultura, Integração, Social...</div>
                 </div>
             </a>
           </div>
@@ -428,7 +429,7 @@
                 </div>
                 <div class="details">
                     <div class="number">
-                        <span data-counter="counterup">Iniciacao Cientifica no Laboratorio ABC</span>
+                        <span data-counter="counterup">Iniciação Cientifica no Laboratório ABC</span>
                     </div>
                     <div class="desc"><span class="fa fa-tag"></span>  Engenharia Civil, Autocad... </div>
                 </div>
@@ -478,7 +479,7 @@
 
         <!-- Perfil Meus Projetos-->
         <script type="text/template" id="my-projects">
-          <h1 class="page-title">Projetos</br><small>Os projetos criados por voce!!</small></h1>
+          <h1 class="page-title">Projetos<a href="#new-project" class="btn btn-small btn-success pull-right">+</a></br><small>Os projetos criados por você</small></h1>
           <div class="row">
           <div class="col-lg-12">
             <a class="dashboard dashboard-v2 yellow" href="#project">
@@ -498,7 +499,7 @@
 
         <!-- Perfil Minhas Inscricoes-->
         <script type="text/template" id="inscricoes">
-          <h1 class="page-title">Inscricoes</br><small>Os projetos ao qual voce se inscreveu!!</small></h1>
+          <h1 class="page-title">Inscrições</br><small>Os projetos ao qual você se inscreveu!!</small></h1>
           <div class="row">
           <div class="col-lg-12">
             <a class="dashboard dashboard-v2 green" href="#project">
@@ -520,7 +521,7 @@
                 </div>
                 <div class="details">
                     <div class="number">
-                        <span data-counter="counterup" data-value="120">Aula de Reforco de Fisica II</span>
+                        <span data-counter="counterup" data-value="120">Aula de Reforço para Fisica II</span>
                     </div>
                     <div class="desc"><span class="fa fa-tag"></span> Calculo I, Física I, Calculo II</div>
                 </div>
@@ -615,6 +616,23 @@
         </div>
         </script>
 
+        <!-- Cadastro de Projeto -->
+        <script type="text/template" id="project-registration">
+          {{> appHeader }}
+          <div class="container">
+            <h2>Crie um novo projeto</h2>
+            <h4>Falta pouco para empreender</h4>
+              <label for="project-name">Nome</label>
+              <input name="project-name" type="text" class="form-control" required placeholder="Nome do projeto" aria-describedby="basic-addon2">
+              <label for="project-desc">Descrição</label>
+              <textarea name="project-desc" rows="5" multiline="true" class="form-control" placeholder="Descreva o projeto para a comunidade" aria-describedby="basic-addon2"></textarea>
+              <br>
+              {{> skillsCheckboxes title="Habilidades Desejadas"}}
+              {{> interestsCheckboxes title="Áreas de Interesse/Abrangência"}}
+              <a class="pull-right btn btn-primary btn-large" href="#project">Criar</a>
+          </div>
+        </script>
+
         <!-- Pagina do Projeto -->
         <script type="text/template" id="project-page">
             {{> appHeader }}
@@ -666,6 +684,7 @@
         <script type="text/javascript" src="js/views/RegistrationView.js"></script>
         <script type="text/javascript" src="js/views/ProfileView.js"></script>
         <script type="text/javascript" src="js/views/ProjectView.js"></script>
+        <script type="text/javascript" src="js/views/ProjectRegistrationView.js"></script>
 
         <!-- App script -->
         <script type="text/javascript" src="js/index.js"></script>
