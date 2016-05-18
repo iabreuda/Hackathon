@@ -4,11 +4,13 @@
     // Setup reusable parts
     var Header = Handlebars.compile( $("#head-navbar").html() );
     var ProjectCard = Handlebars.compile( $("#project-card").html() );
+    var UserCard = Handlebars.compile( $("#user-card").html() );
     var InterestsCheckboxes = Handlebars.compile( $("#interests-checkboxes").html() );
     var SkillsCheckboxes = Handlebars.compile( $("#skills-checkboxes").html() );
 
     Handlebars.registerPartial( 'appHeader', Header );
     Handlebars.registerPartial( 'ProjectCard', ProjectCard );
+    Handlebars.registerPartial( 'userCard', UserCard );
     Handlebars.registerPartial( 'interestsCheckboxes', InterestsCheckboxes );
     Handlebars.registerPartial( 'skillsCheckboxes', SkillsCheckboxes );
 
@@ -23,6 +25,7 @@
     ProfileView.prototype.template_inscricoes = Handlebars.compile($("#inscricoes").html())
     ProfileView.prototype.template_edit = Handlebars.compile($("#edit-profile").html())
     RegistrationView.prototype.template = Handlebars.compile( $("#user-registration").html());
+    ProjectView.prototype.template = Handlebars.compile( $("#project-page").html());
 
     /* ---------------------------------- Local Variables ---------------------------------- */
     var service = new BackendService();
@@ -57,6 +60,10 @@
 
         router.addRoute('edit-profile', function() {
             $('body').html(new ProfileView(service).render("edit-profile").$el);
+        });
+
+        router.addRoute('project', function() {
+            $('body').html(new ProjectView(service).render().$el);
         });
 
         router.addRoute('dado/:id', function(id) {
