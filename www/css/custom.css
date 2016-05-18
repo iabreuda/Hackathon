@@ -1,3 +1,120 @@
 .form-space {
     padding-bottom: 20px;
 }
+.dashboard {
+    display: block;
+    margin-bottom: 25px;
+    overflow: hidden;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+.dashboard.blue {
+    background-color: #0B263A;
+}
+h1 {
+    font-size: 25px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    font-weight: 300;
+    text-shadow: none;
+    color: #337ab7;
+}
+.page-title {
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+.dashboard.dashboard-v2 .visual {
+    padding-top: 35px;
+    margin-bottom: 40px;
+    padding: 0;
+    font-size: 28px;
+    letter-spacing: -1px;
+    display: block;
+    color: #666;
+    margin: 0 0 15px;
+    font-weight: 300;
+}
+@media (max-width: 767px)
+.page-content-wrapper .page-content .page-title small {
+    font-size: 13px;
+    padding-top: 3px;
+}
+media (max-width: 480px)
+.page-content-wrapper .page-content .page-title small {
+    display: block;
+    clear: both;
+}
+.page-title small {
+    color: #666;
+}
+.dashboard .visual {
+    width: 80px;
+    height: 80px;
+    display: block;
+    float: left;
+    padding-top: 10px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    font-size: 35px;
+    line-height: 35px;
+}
+.dashboard.blue .visual>i {
+    color: #FFF;
+    opacity: .1;
+}
+.dashboard .visual>i {
+    margin-left: -20px;
+    font-size: 110px;
+    line-height: 110px;
+}
+.dashboard .details {
+    position: absolute;
+    right: 15px;
+    padding-right: 15px;
+}
+.dashboard.blue .details .number {
+    color: #FFF;
+}
+.dashboard.blue .details .desc {
+    color: #FFF;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+.dashboard .details .desc {
+    text-align: right;
+    font-size: 16px;
+    letter-spacing: 0;
+    font-weight: 300;
+}
+.dashboard .details .number {
+    padding-top: 25px;
+    text-align: right;
+    font-size: 34px;
+    line-height: 36px;
+    letter-spacing: -1px;
+    margin-bottom: 0;
+    font-weight: 300;
+}
+.dashboard .details .desc {
+    text-align: right;
+    font-size: 16px;
+    letter-spacing: 0;
+    font-weight: 300;
+}
+a {
+    text-shadow: none;
+    color: #337ab7;
+}
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Open Sans",sans-serif;
+}
+body {
+    color: #333;
+    padding: 0!important;
+    margin: 0!important;
+    direction: "ltr";
+    font-size: 14px;
+}
