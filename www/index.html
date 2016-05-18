@@ -17,7 +17,7 @@
         <meta charset="utf-8">
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/custom.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
         <title>Chega Mais UFRJ</title>
     </head>
     <body>
@@ -138,7 +138,7 @@
                       <img src="../images/gecom.jpg" height="250" width="200" border="10">
                     </a>
                     </div>
-                    <div class="col-lg-8 alert alert-info" role="alert">
+                    <div class="col-lg-8">
                     {{{context}}}
                     </div>
                   </div>
@@ -161,7 +161,19 @@
 
         <!-- Perfil DashBoard-->
         <script type="text/template" id="dashboard">
-          <p>DashBoard</p>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <a class="dashboard dashboard-stat-v2 blue" href="#">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup" data-value="1349">1349</span>
+                    </div>
+                    <div class="desc"> New Feedbacks </div>
+                </div>
+            </a>
+          </div>
         </script>
 
         <!-- Perfil Meus Projetos-->
