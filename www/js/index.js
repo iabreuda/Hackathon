@@ -12,6 +12,9 @@
     LoginView.prototype.template = Handlebars.compile($("#login").html());
     ProfileView.prototype.template = Handlebars.compile($("#perfil").html())
     ProfileView.prototype.template_dashboard = Handlebars.compile($("#dashboard").html())
+    ProfileView.prototype.template_myprojects = Handlebars.compile($("#my-projects").html())
+    ProfileView.prototype.template_mensagens = Handlebars.compile($("#mensagens").html())
+    ProfileView.prototype.template_inscricoes = Handlebars.compile($("#inscricoes").html())
     RegistrationView.prototype.template = Handlebars.compile( $("#user-registration").html());
 
     /* ---------------------------------- Local Variables ---------------------------------- */
@@ -31,6 +34,18 @@
 
         router.addRoute('dashboard', function() {
             $('body').html(new ProfileView(service).render("dashboard").$el);
+        });
+
+        router.addRoute('inscricoes', function() {
+            $('body').html(new ProfileView(service).render("inscricoes").$el);
+        });
+
+        router.addRoute('mensagens', function() {
+            $('body').html(new ProfileView(service).render("mensagens").$el);
+        });
+
+        router.addRoute('my-projects', function() {
+            $('body').html(new ProfileView(service).render("my-projects").$el);
         });
 
         router.addRoute('dado/:id', function(id) {

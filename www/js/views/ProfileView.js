@@ -5,6 +5,15 @@ var ProfileView = function (service) {
           case "dashboard":
             var obj = {context: this.template_dashboard}
             break;
+          case "my-projects":
+            var obj = {context: this.template_myprojects}
+            break;
+          case "inscricoes":
+            var obj = {context: this.template_inscricoes}
+            break;
+          case "mensagens":
+            var obj = {context: this.template_mensagens}
+            break;
         }
         this.$el.html(this.template(obj));
         return this;
