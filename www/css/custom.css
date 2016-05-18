@@ -14,6 +14,15 @@
 .dashboard.blue {
     background-color: #0B263A;
 }
+.dashboard.yellow {
+    background-color: rgb(103, 115, 6);
+}
+.dashboard.green {
+    background-color: #077D00;
+}
+.dashboard.red {
+    background-color: #2B2B2B;
+}
 h1 {
     font-size: 25px;
     margin-top: 0px;
@@ -65,6 +74,18 @@ media (max-width: 480px)
     color: #FFF;
     opacity: .1;
 }
+.dashboard.yellow .visual>i {
+    color: #FFF;
+    opacity: .1;
+}
+.dashboard.green .visual>i {
+    color: #FFF;
+    opacity: .1;
+}
+.dashboard.red .visual>i {
+    color: #FFF;
+    opacity: .1;
+}
 .dashboard .visual>i {
     margin-left: -20px;
     font-size: 110px;
@@ -78,7 +99,31 @@ media (max-width: 480px)
 .dashboard.blue .details .number {
     color: #FFF;
 }
+.dashboard.yellow .details .number {
+    color: #FFF;
+}
+.dashboard.green .details .number {
+    color: #FFF;
+}
+.dashboard.red .details .number {
+    color: #FFF;
+}
 .dashboard.blue .details .desc {
+    color: #FFF;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+.dashboard.green .details .desc {
+    color: #FFF;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+.dashboard.red .details .desc {
+    color: #FFF;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+.dashboard.yellow .details .desc {
     color: #FFF;
     opacity: 1;
     filter: alpha(opacity=100);
