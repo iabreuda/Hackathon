@@ -95,7 +95,7 @@
           <div class="col-xg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="media memberfix">
               <div class="media-left">
-                <a>
+                <a href="#user">
                   <img class="media-object circular" src="../images/chuck.jpg" alt="Avatar"/>
                 </a>
               </div>
@@ -729,6 +729,74 @@
         </div>
         </script>
 
+        <!-- Pagina de Usuario -->
+        <script type="text/template" id="user-page">
+          {{> appHeader }}
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                    <div class="col-lg-12">
+                      <div class="col-lg-3">
+                      <img src="../images/chuck.jpg" class="circular-big">
+                      <h3>Fulano de Tal da Silva Souza</h3>
+                      <h4>Estudante/Campus Fundão</h4>
+                      <h4>Programador</h4>
+                      <ul class="nav nav-pills nav-stacked usr-actions">
+                        <li role="presentation" ><a href="">Enviar Mensagem</a></li>
+                        <li role="presentation" ><a href="">Página Web</a></li>
+                      </ul>
+                      </div>
+                      <div class="col-lg-8 smooth-border-left">
+                        <h4 class="bluish">Habilidades</h4>
+                        <div class="content">
+                          Programação, Contabilidade, Quimica
+                        </div>
+                        <h4 class="bluish">Interesses</h4>
+                        <div class="content">
+                          Educação, Artes, Gastronomia
+                        </div>
+                        <h4 class="bluish">Projetos</h4>
+                        <div class="content">
+                          <div class="row">
+                          <div class="col-md-6">
+                          <a class="dashboard dashboard-v2 blue" href="#project">
+                              <div class="visual">
+                                  <i class="fa fa-globe"></i>
+                              </div>
+                              <div class="details">
+                                  <div class="number">
+                                      <span data-counter="counterup"> Hackathon SE 2016 </span>
+                                  </div>
+                                  <div class="desc"><span class="fa fa-tag"></span> Interdisciplinar</div>
+                              </div>
+                          </a>
+                        </div>
+                         <div class="col-md-6">
+                          <a class="dashboard dashboard-v2 blue" href="#project">
+                              <div class="visual">
+                                  <i class="fa fa-globe"></i>
+                              </div>
+                              <div class="details">
+                                  <div class="number">
+                                      <span data-counter="counterup"> Hackathon SE 2016 </span>
+                                  </div>
+                                  <div class="desc"><span class="fa fa-tag"></span> Interdisciplinar</div>
+                              </div>
+                          </a>
+                        </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </script>
+
         <!-- Cadastro de Projeto -->
         <script type="text/template" id="project-registration">
           {{> appHeader }}
@@ -796,6 +864,7 @@
         <script type="text/javascript" src="js/views/LoginView.js"></script>
         <script type="text/javascript" src="js/views/RegistrationView.js"></script>
         <script type="text/javascript" src="js/views/ProfileView.js"></script>
+        <script type="text/javascript" src="js/views/UserView.js"></script>
         <script type="text/javascript" src="js/views/ProjectView.js"></script>
         <script type="text/javascript" src="js/views/ProjetosView.js"></script>
         <script type="text/javascript" src="js/views/ProjectRegistrationView.js"></script>
