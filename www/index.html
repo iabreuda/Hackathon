@@ -145,10 +145,10 @@
                   <div class="col-lg-12">
                     <div class="col-lg-3">
                       <ul class="nav nav-pills nav-stacked">
-                        <li role="presentation" class="active"><a href="#dashboard">Inicio</a></li>
-                        <li role="presentation"><a href="#my-projects">Meus Projetos<span class="pull-right badge">1</span></a></li>
-                        <li role="presentation"><a href="#inscricoes">Minhas Inscricoes<span class="pull-right badge">2</span></a></li>
-                        <li role="presentation"><a href="#mensagens">Mensagens<span class="pull-right badge">52</span></a></li>
+                        <li role="presentation" {{#if dashboard}}class="active"{{/if}}><a href="#dashboard">Inicio</a></li>
+                        <li role="presentation" {{#if myprojects}}class="active"{{/if}}><a href="#my-projects">Meus Projetos<span class="pull-right badge">1</span></a></li>
+                        <li role="presentation" {{#if inscricoes}}class="active"{{/if}}><a href="#inscricoes">Minhas Inscricoes<span class="pull-right badge">2</span></a></li>
+                        <li role="presentation" {{#if mensagens}}class="active"{{/if}}><a href="#mensagens">Mensagens<span class="pull-right badge">52</span></a></li>
                       </ul>
                     </div>
                   </div>
