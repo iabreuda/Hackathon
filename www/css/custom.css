@@ -1,6 +1,7 @@
 .form-space {
     padding-bottom: 20px;
 }
+
 .dashboard {
     display: block;
     margin-bottom: 25px;
@@ -162,4 +163,20 @@ body {
     margin: 0!important;
     direction: "ltr";
     font-size: 14px;
+}
+
+.circular {
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    border-width: 1px;
+    }
+
+.media-role-fix {
+    padding-top: 10px;
+}
+
+.memberfix {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
