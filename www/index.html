@@ -531,11 +531,44 @@
 
         <!-- Perfil Mensagens-->
         <script type="text/template" id="mensagens">
-          <p>Mensagens</p>
+          <h1 class="page-title">Inbox</br><small>Minhas mensagens!!</small></h1>
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Message 1</h4>
+              <p class="list-group-item-text"><span class="fa fa-user"> Fulano de Tal</span></p>
+            </a>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Message 2</h4>
+              <p class="list-group-item-text"><span class="fa fa-user"> Fulano de Tal</span></p>
+            </a>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Message 3</h4>
+              <p class="list-group-item-text"><span class="fa fa-user"> Fulano de Tal</span></p>
+            </a>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Message 4</h4>
+              <p class="list-group-item-text"><span class="fa fa-user"> Fulano de Tal</span></p>
+            </a>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Message 5</h4>
+              <p class="list-group-item-text"><span class="fa fa-user"> Fulano de Tal</span></p>
+            </a>
+          </div>
+          <nav>
+            <ul class="pagination">
+              <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
+            </ul>
+          </nav>
         </script>
 
         <!-- Perfil Editar -->
         <script type="text/template" id="edit-profile">
+          <h1 class="page-title">Preferencias</br><small>Defina as suas preferencias e competencias!!</small></h1>
           {{> skillsCheckboxes }}
           {{> interestsCheckboxes }}
         </script>
