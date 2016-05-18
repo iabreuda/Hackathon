@@ -113,9 +113,9 @@
                           <span class="input-group-addon" id="basic-addon1">Senha</span>
                           <input type="text" class="form-control" required placeholder="minhasenh@" aria-describedby="basic-addon2">
                         </div>
-                        <div class="col-lg-12">
+                        <div>
                           <button type="button" class="btn btn-success">Login com Siga</button>
-                          <button type="button" class="pull-right btn btn-primary">Login</button>
+                          <a href="#dashboard" class="pull-right btn btn-primary">Login</a>
                         </div>
                     </div>
                   </div>
@@ -127,10 +127,50 @@
           </div>
         </script>
 
+        <!-- Perfil Main -->
+        <script type="text/template" id="perfil">
+        {{> appHeader }}
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section">
+                <div class="container">
+                  <div class="col-lg-12">
+                    <div class="col-lg-3">
+                    <a href="#" class="thumbnail">
+                      <img src="../images/gecom.jpg" height="250" width="200" border="10">
+                    </a>
+                    </div>
+                    <div class="col-lg-8 alert alert-info" role="alert">
+                    {{{context}}}
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="col-lg-3">
+                      <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation" class="active"><a href="#">Home</a></li>
+                        <li role="presentation"><a href="#">Projetos<span class="pull-right badge">1</span></a></li>
+                        <li role="presentation"><a href="#">Inscricoes<span class="pull-right badge">2</span></a></li>
+                        <li role="presentation"><a href="#">Mensagens<span class="pull-right badge">52</span></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </script>
+
+        <!-- Perfil DashBoard-->
+        <script type="text/template" id="dashboard">
+          <p>DashBoard</p>
+        </script>
+
         <!-- Cadastro de Usuário -->
         <script type="text/template" id="user-registration">
-            {{> appHeader }}
-                  <div class="container">
+        {{> appHeader }}
+        <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="section">
@@ -372,7 +412,7 @@
             </div>
           </div>
         </div>
-      </div>
+        </div>
         </script>
 
         <script type="text/javascript" src="cordova.js"></script>
@@ -387,6 +427,7 @@
         <script type="text/javascript" src="js/views/MainView.js"></script>
         <script type="text/javascript" src="js/views/LoginView.js"></script>
         <script type="text/javascript" src="js/views/RegistrationView.js"></script>
+        <script type="text/javascript" src="js/views/ProfileView.js"></script>
 
         <!-- App script -->
         <script type="text/javascript" src="js/index.js"></script>
