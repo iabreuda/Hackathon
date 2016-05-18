@@ -74,7 +74,11 @@
         });
 
         router.addRoute('project', function() {
-            $('body').html(new ProjectView(service).render().$el);
+            $('body').html(new ProjectView(service).render().$el );
+        });
+
+        router.addRoute('project/:id', function(id) {
+            $('body').html( new ProjectView( service, id ).render().$el );
         });
 
         router.addRoute('projetos', function() {

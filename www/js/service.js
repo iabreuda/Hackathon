@@ -60,6 +60,15 @@ var BackendService = function( config ) {
         Backendless.Persistence.of( Project ).save( projectObj , new Backendless.Async( success, projectSaveFail ));
     };
 
+    this.retrieveProject = function( id , success ) {
+        var fetchError = function ( err ) {
+            console.warn( 'Failed to fetch project ID:' + id );
+            console.log( err );
+        };
+
+        Backendless.Persistence.of( Project ).findById( id , new Backendless.Async( success, fetchError ));
+    };
+
     this.loginUser = function ( userData, success, failure ) {
         if ( userData.login == "" || userData.password == "" ){
             return false;

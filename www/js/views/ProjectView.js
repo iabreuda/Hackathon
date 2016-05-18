@@ -1,15 +1,30 @@
-var ProjectView = function (service) {
+var ProjectView = function ( service, id ) {
 
-    this.render = function renderProjectView() {
-        this.$el.html(this.template());
+    var self = this;
+
+    this.render = function renderProjectView( data ) {
+        this.$el.html(this.template( data ));
         return this;
     };
 
     this.initialize = function() {
        // Define a div wrapper for the view ( used to attach events )
+       console.log( 'Initializing Project view' );
        this.$el = $('<div/>');
-       this.render();
-    }
+       service.retrieveProject( id , function ( data ) {
+          console.log( data );
+
+          var context = {
+             Nome: data.Nome,
+             Descricao: data.Descricao,
+             Interesses: data.Interesses,
+             Habilidades: data.Hablidades
+          };
+
+          self.render( data );
+       });
+
+    };
 
     this.initialize();
 }
