@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <meta charset="utf-8">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/custom.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <title>Chega Mais UFRJ</title>
+    </head>
+    <body>
+        <!-- Barra de navegação - USAR COMO {{> appHeader}} -->
+        <script type="text/template" id="head-navbar">
+            <div class="navbar navbar-default">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href=""><span>Chega mais UFRJ</span></a>
+              </div>
+              <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                  <li>
+                    <a href="#register">Cadastro</a>
+                  </li>
+                  <li>
+                    <a href="">Projetos</a>
+                  </li>
+                  <li>
+                    <a href="register">Registre um Projeto</a>
+                  </li>
+                  <li>
+                    <a href="#login">Entrar</a>
+                  </li>
+                </ul>
+              </div>
+          </div>
+        </script>
+
+        <!-- Index -->
+        <script type="text/template" id="main">
+        {{> appHeader }}
+        <div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                    <div class="jumbotron">
+                      <p>Desenvolva ideias interdisciplinares na UFRJ</p>
+                      <p>
+                        <a href="#register" class="btn btn-primary btn-large">
+                          Cadastre-se
+                        </a>
+                      </p>
+                    </div>
+                    <div class="row">
+                      {{> ProjectCard }}
+                      {{> ProjectCard }}
+                      {{> ProjectCard }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </script>
+
+        <!-- Project Card -->
+        <script type="text/template" id="project-card">
+            <div class="col-md-4">
+            <!-- <img alt="50%" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive"> -->
+            <h2>A title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
+              <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+              <br>Ut enim ad minim veniam, quis nostrud</p>
+          </div>
+        </script>
+
+        <!-- Login -->
+        <script type="text/template" id="login">
+        {{> appHeader }}
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                  <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <div class="well">
+                        <div class="input-group form-space">
+                          <span class="input-group-addon" id="basic-addon1">Login</span>
+                          <input type="password" class="form-control" required placeholder="fulano@mail.com.br" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="form-space input-group">
+                          <span class="input-group-addon" id="basic-addon1">Senha</span>
+                          <input type="text" class="form-control" required placeholder="minhasenh@" aria-describedby="basic-addon2">
+                        </div>
+                        <div class="col-lg-12">
+                          <button type="button" class="btn btn-success">Login com Siga</button>
+                          <button type="button" class="pull-right btn btn-primary">Login</button>
+                        </div>
+                    </div>
+                  </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </script>
+
+        <!-- Cadastro de Usuário -->
+        <script type="text/template" id="user-registration">
+            {{> appHeader }}
+                  <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section">
+              <div class="container">
+                <div class="row">
+                  <div class="form-space col-md-12">
+                    <div class="input-group form-space">
+                      <span class="input-group-addon" id="basic-addon1">Nome</span>
+                      <input type="text" class="form-control" required placeholder="Nome Completo" aria-describedby="basic-addon1">
+                      <span class="input-group-addon" id="basic-addon1">Senha</span>
+                      <input type="password" class="form-control" required placeholder="Senha" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="form-space input-group">
+                      <span class="input-group-addon" id="basic-addon1">Matricula</span>
+                      <input type="text" class="form-control" required placeholder="Numero de Matricula, DRE ..." aria-describedby="basic-addon2">
+                      <span class="input-group-addon" id="basic-addon1">Curso</span>
+                      <input type="text" class="form-control" placeholder="Curso Matriculado" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="form-space input-group">
+                      <span class="input-group-addon" id="basic-addon1">Telefone</span>
+                      <input type="text" class="form-control" placeholder="Telefone fixo" aria-describedby="basic-addon3">
+                      <span class="input-group-addon" id="basic-addon1">Celular</span>
+                      <input type="text" class="form-control" required placeholder="Celular" aria-describedby="basic-addon3">
+                      <span class="input-group-addon" id="basic-addon1">Email</span>
+                      <input type="text" class="form-control" required placeholder="Seu email de contato utilizado no login" aria-describedby="basic-addon3">
+                    </div>
+                    <span class="input-group-addon" id="basic-addon1">Habilidades</span>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Programação</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Contabilidade</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Arquitetura</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Administração</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Física</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Quimica</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Matematica</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Medicina</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Comunicação</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Letras</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Direito</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Sociologia</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 form-space"></div>
+                    <span class="input-group-addon" id="basic-addon1">Interesses</span>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Mobilidade</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Educação</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Gastronomia</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Pesquisas</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Artes</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Animais</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Saúde</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Cultura</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Viagens</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Linguistica</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Esportes</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <input type="checkbox" aria-label="...">
+                          </span>
+                          <span class="form-control">Política</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 form-space"></div>
+                    <button id="reg-btn" type="button" class="pull-right btn btn-primary">Registrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </script>
+
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- External Libraries -->
+        <script type="text/javascript" src="bower_components/handlebars/handlebars.js"></script>
+        <script type="text/javascript" src="bower_components/backendless/libs/backendless.js"></script>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="js/router.js"></script>
+        <script type="text/javascript" src="js/service.js"></script>
+        <!-- Views -->
+        <script type="text/javascript" src="js/views/MainView.js"></script>
+        <script type="text/javascript" src="js/views/LoginView.js"></script>
+        <script type="text/javascript" src="js/views/RegistrationView.js"></script>
+
+        <!-- App script -->
+        <script type="text/javascript" src="js/index.js"></script>
+
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    </body>
+</html>
