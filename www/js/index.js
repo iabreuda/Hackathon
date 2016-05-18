@@ -90,9 +90,11 @@
         });
 
         router.addRoute('dado/:id', function(id) {
-            service.findById(parseInt(id)).done( function( entry ) {
+            // service.findById(parseInt(id)).done( function( entry ) {
 
-            });
+            // });
+            console.log( id );
+            window.location = '';
         });
         router.start();
     });

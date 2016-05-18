@@ -51,6 +51,15 @@ var BackendService = function( config ) {
         return Backendless.UserService.register( user, new Backendless.Async( self.userRegistered, self.gotErrorRegister) );
     };
 
+    this.saveProject = function ( projectObj, success ) {
+        var projectSaveFail = function ( err ) {
+            console.warn( 'Failed to save project' );
+            console.log( err );
+        };
+
+        Backendless.Persistence.of( Project ).save( projectObj , new Backendless.Async( success, projectSaveFail ));
+    };
+
     this.loginUser = function ( userData, success, failure ) {
         if ( userData.login == "" || userData.password == "" ){
             return false;

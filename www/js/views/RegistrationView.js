@@ -19,7 +19,8 @@ var RegistrationView = function (service) {
        //
         $( this.$el ).on('click', function( evt ) {
           if ( evt.target.id == "reg-btn" ) {
-            self.registerUser();
+            //self.registerUser();
+            console.log( 'btn' );
           }
        });
 
