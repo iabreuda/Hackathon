@@ -10,6 +10,8 @@
     // Setup main templates
     MainView.prototype.template = Handlebars.compile($("#main").html());
     LoginView.prototype.template = Handlebars.compile($("#login").html());
+    ProfileView.prototype.template = Handlebars.compile($("#perfil").html())
+    ProfileView.prototype.template_dashboard = Handlebars.compile($("#dashboard").html())
     RegistrationView.prototype.template = Handlebars.compile( $("#user-registration").html());
 
     /* ---------------------------------- Local Variables ---------------------------------- */
@@ -25,6 +27,10 @@
 
         router.addRoute('login', function() {
             $('body').html(new LoginView(service).render().$el);
+        });
+
+        router.addRoute('dashboard', function() {
+            $('body').html(new ProfileView(service).render("dashboard").$el);
         });
 
         router.addRoute('dado/:id', function(id) {
