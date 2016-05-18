@@ -16,7 +16,7 @@ var BackendService = function( config ) {
         if(cache["stayLoggedIn"]){
            var tokenExist = Backendless.UserService.isValidLogin();
            if(tokenExist) {
-              userLoggedInStatus(cache["user-token"]);
+              self.userLoggedIn(cache["user-token"]);
            } else {
               Backendless.LocalCache.clear();
            }
@@ -49,6 +49,34 @@ var BackendService = function( config ) {
         user['vinculo'] = userData.vinculo;
 
         return Backendless.UserService.register( user, new Backendless.Async( self.userRegistered, self.gotErrorRegister) );
+    };
+
+    this.loginUser = function ( userData, success, failure ) {
+        if ( userData.login == "" || userData.password == "" ){
+            return false;
+        }
+        Backendless.UserService.login(userData.login, userData.password, userData.remember, new Backendless.Async( self.userLoginCallbackGenerator( success ), failure ) );
+    };
+
+    this.userLoginCallbackGenerator = function userLoginCallbackGenerator( callback ) {
+        return function userLoggedIn( user ) {
+            BackendService.prototype.user = user;
+            callback( user );
+        };
+    };
+
+    this.logoutUser = function ( userLoggedOut ) {
+        localStorage.clear();
+        Backendless.UserService.logout( new Backendless.Async( userLoggedOut, self.gotError ) );
+    };
+
+    this.userLoggedIn = function ( user ) {
+        BackendService.prototype.user = user;
+        console.log( user );
+    };
+
+    this.gotError = function ( err ) {
+        console.log( err );
     };
 
 };

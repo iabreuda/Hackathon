@@ -45,6 +45,14 @@
             $('body').html(new LoginView(service).render().$el);
         });
 
+        router.addRoute('logout', function () {
+            service.logoutUser( function ( data ) {
+                console.log( 'Logged out' );
+                console.log( data );
+                window.location = "";
+            });
+        });
+
         router.addRoute('dashboard', function() {
             $('body').html(new ProfileView(service).render("dashboard").$el);
         });

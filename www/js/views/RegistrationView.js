@@ -38,7 +38,11 @@ var RegistrationView = function (service) {
           habilidades: checkboxToString('skills',','),
           interesses: checkboxToString('interests',',')
       };
-      service.registerUser( userData );
+      var success = function success ( info ) {
+        window.location = "#dashboard";
+      };
+      service.registerUser( userData, success, failure );
+
     };
 
     this.initialize();
