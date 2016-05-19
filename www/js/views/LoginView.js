@@ -26,6 +26,7 @@ var LoginView = function (service) {
           password: $('input[name="pwd"]').val().trim(),
           remember: true
        };
+       NProgress.start();
        service.loginUser( userData, self.loginSuccess, self.loginFailure );
     };
 
@@ -36,6 +37,7 @@ var LoginView = function (service) {
     };
 
     this.loginFailure = function( err ) {
+      NProgress.done();
       console.log( 'Loggin failure');
       console.log( err );
     };

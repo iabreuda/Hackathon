@@ -19,13 +19,13 @@ var ProfileView = function (service) {
             break;
         }
         this.$el.html(this.template(obj));
+        NProgress.done();
         return this;
     };
 
     this.initialize = function() {
        // Define a div wrapper for the view ( used to attach events )
        this.$el = $('<div/>');
-       this.render();
     }
 
     this.initialize();
