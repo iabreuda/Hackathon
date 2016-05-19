@@ -6,12 +6,14 @@ NProgress.configure({ minimum: 2, speed: 500, trickle: false, showSpinner: false
     // Setup reusable parts
     var Header = Handlebars.compile( $("#head-navbar").html() );
     var ProjectCard = Handlebars.compile( $("#project-card").html() );
+    var ProjectBox = Handlebars.compile( $("#project-box").html() );
     var UserCard = Handlebars.compile( $("#user-card").html() );
     var InterestsCheckboxes = Handlebars.compile( $("#interests-checkboxes").html() );
     var SkillsCheckboxes = Handlebars.compile( $("#skills-checkboxes").html() );
 
     Handlebars.registerPartial( 'appHeader', Header );
     Handlebars.registerPartial( 'ProjectCard', ProjectCard );
+    Handlebars.registerPartial( 'ProjectBox', ProjectBox );
     Handlebars.registerPartial( 'userCard', UserCard );
     Handlebars.registerPartial( 'interestsCheckboxes', InterestsCheckboxes );
     Handlebars.registerPartial( 'skillsCheckboxes', SkillsCheckboxes );
