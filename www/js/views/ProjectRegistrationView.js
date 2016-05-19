@@ -10,7 +10,6 @@ var ProjectRegistrationView = function (service) {
     this.initialize = function() {
        // Define a div wrapper for the view ( used to attach events )
        this.$el = $('<div/>');
-       this.render();
 
        $( this.$el ).on('click', function( evt ) {
           if ( evt.target.id == "#btn-prjreg" ) {
@@ -20,6 +19,7 @@ var ProjectRegistrationView = function (service) {
     };
 
     this.registerProject = function () {
+      NProgress.start();
       var proj = new Project({
         Nome : $('input[name="project-name"]').val().trim(),
         Descricao: $('textarea').val().trim(),
