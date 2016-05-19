@@ -68,9 +68,9 @@
                       </p>
                     </div>
                     <div class="row">
+                      {{#each projects}}
                       {{> ProjectCard }}
-                      {{> ProjectCard }}
-                      {{> ProjectCard }}
+                      {{/each}}
                     </div>
                   </div>
                 </div>
@@ -84,7 +84,7 @@
         <script type="text/template" id="project-card">
             <div class="col-md-4">
             <!-- <img alt="50%" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive"> -->
-            <h2><a href="#project">{{{title}}}</a></h2>
+            <h2><a href="#project/{{id}}">{{{title}}}</a></h2>
             <p>{{{description}}}</p>
           </div>
         </script>
