@@ -2,6 +2,7 @@ var UserView = function (service) {
 
     this.render = function renderUserView() {
         this.$el.html(this.template({ "authuser": service.isUserLoggedIn() }));
+        NProgress.done();
         return this;
     };
 

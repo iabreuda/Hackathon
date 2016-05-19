@@ -13,7 +13,7 @@ var router = (function () {
     }
 
     function start() {
-
+        NProgress.start();
         var path = window.location.hash.substr(1),
             parts = path.split('/'),
             partsLength = parts.length;

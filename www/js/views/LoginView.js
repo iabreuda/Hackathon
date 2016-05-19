@@ -4,6 +4,7 @@ var LoginView = function (service) {
 
     this.render = function renderLoginView() {
         this.$el.html(this.template());
+        NProgress.done();
         return this;
     };
 

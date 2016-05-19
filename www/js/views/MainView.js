@@ -18,6 +18,7 @@ var MainView = function (service) {
       };
 
       this.$el.html(this.template({"authuser": service.isUserLoggedIn() ,"projects": projects}));
+      NProgress.done();
       return this;
     };
 

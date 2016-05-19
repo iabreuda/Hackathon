@@ -3,13 +3,18 @@ var ProjectRegistrationView = function (service) {
     var self = this;
 
     this.render = function renderProjectRegistrationView() {
-        this.$el.html(this.template());
+        this.$el.html(this.template({ "authuser": true, "cProjectView": true }));
+        NProgress.done();
         return this;
     };
 
     this.initialize = function() {
        // Define a div wrapper for the view ( used to attach events )
        this.$el = $('<div/>');
+
+       if ( !service.isUserLoggedIn() ) {
+         window.location = "#login";
+       }
 
        $( this.$el ).on('click', function( evt ) {
           if ( evt.target.id == "#btn-prjreg" ) {

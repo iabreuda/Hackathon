@@ -1,5 +1,3 @@
-NProgress.configure({ minimum: 2, speed: 500, trickle: false, showSpinner: false });
-
 (function () {
 
     /* ------------------------------------ Templates -------------------------------------- */
@@ -106,6 +104,9 @@ NProgress.configure({ minimum: 2, speed: 500, trickle: false, showSpinner: false
         });
         router.start();
     });
+
+    /* ------------------------------------- Plugin Setup ----------------------------------- */
+    NProgress.configure({ minimum: 2, speed: 500, trickle: false, showSpinner: false });
 
     /* --------------------------------- Event Registration -------------------------------- */
 
