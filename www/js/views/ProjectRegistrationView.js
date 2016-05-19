@@ -30,7 +30,7 @@ var ProjectRegistrationView = function (service) {
       service.saveProject( proj, function success( info ) {
         console.log( "Projeto armazenado" );
         console.log( info );
-        window.location = "#project";
+        window.location = "#project/" + info.objectId ;
       });
 
     };
