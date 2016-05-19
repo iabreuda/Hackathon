@@ -1,7 +1,8 @@
 var MainView = function (service) {
 
     this.render = function renderMainView() {
-        this.$el.html(this.template());
+        var obj = {title: "Hackathon 2016", description: "AAAAAA" };
+        this.$el.html(this.template(obj));
         return this;
     };
 
