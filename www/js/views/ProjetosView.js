@@ -15,7 +15,7 @@ var ProjetosView = function (service) {
         for (var i = 0; i < records.length; i++) {
           projects[i] = {id: records[i].objectId, title: records[i].Nome, habilidades: records[i].Habilidades };
         };
-        this.$el.html(this.template({"projects": projects, "authuser": service.isUserLoggedIn()}));
+        this.$el.html(this.template({"projects": projects, "authuser": service.isUserLoggedIn(), vProjetos: true}));
         NProgress.done();
         return this;
     };

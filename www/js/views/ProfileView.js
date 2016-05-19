@@ -18,7 +18,7 @@ var ProfileView = function (service) {
             var obj = {context: this.template_edit, editprofile: true }
             break;
         }
-        $.extend(obj, { "authuser": service.isUserLoggedIn() });
+        $.extend(obj, { "authuser": service.isUserLoggedIn(), "vDashboard" : true });
         this.$el.html(this.template(obj));
         NProgress.done();
         return this;

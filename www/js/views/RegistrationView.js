@@ -2,8 +2,8 @@ var RegistrationView = function (service) {
 
     self = this;
 
-    this.render = function renderLoginView() {
-        this.$el.html(this.template());
+    this.render = function renderRegistrationView() {
+        this.$el.html(this.template({ vRegistration : true }));
         return this;
     };
 

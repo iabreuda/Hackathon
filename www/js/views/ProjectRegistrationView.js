@@ -3,7 +3,7 @@ var ProjectRegistrationView = function (service) {
     var self = this;
 
     this.render = function renderProjectRegistrationView() {
-        this.$el.html(this.template({ "authuser": true, "cProjectView": true }));
+        this.$el.html(this.template({ "authuser": true, "vNewProject": true }));
         NProgress.done();
         return this;
     };
