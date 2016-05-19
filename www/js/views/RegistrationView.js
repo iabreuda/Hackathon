@@ -13,7 +13,9 @@ var RegistrationView = function (service) {
        this.$el = $('<div/>');
        //debugger;
 
-
+       if( service.isUserLoggedIn() ) {
+          window.location = "#dashboard";
+       }
 
        this.render();
        //debugger;
