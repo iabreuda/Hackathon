@@ -28,6 +28,7 @@ var RegistrationView = function (service) {
     };
 
     this.registerUser = function () {
+       NProgress.start();
        var userData = {
           name : $('input[name="user_name"]').val().trim(),
           pwd : $('input[type="password"]').val().trim(),
