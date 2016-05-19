@@ -10,7 +10,11 @@ var LoginView = function (service) {
     this.initialize = function() {
        // Use $el para definir event handlers
        this.$el = $('<div/>');
-       this.render();
+
+       if( service.isUserLoggedIn() ) {
+          self.loginSuccess();
+          return;
+       }
 
        $( this.$el ).on('click', function( evt ) {
           if ( evt.target.id == "login-btn" ) {

@@ -16,6 +16,7 @@ var ProjectView = function ( service, id ) {
     };
 
     this.initialize = function() {
+       NProgress.start();
        // Define a div wrapper for the view ( used to attach events )
        console.log( 'Initializing Project view' );
        this.$el = $('<div/>');
