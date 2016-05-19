@@ -24,7 +24,7 @@
     <body>
         <!-- Barra de navegação - USAR COMO {{> appHeader}} -->
         <script type="text/template" id="head-navbar">
-            <div class="navbar navbar-inverse">
+            <nav class="navbar navbar-default">
               <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
                   <span class="sr-only">Toggle navigation</span>
@@ -32,7 +32,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href=""><span>uni.co</span></a>
+                <a class="navbar-brand" href=""><img src="../images/logo.png" alt="uni.co" class="logo"></a>
               </div>
               <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -63,7 +63,7 @@
                   {{/if}}
                 </ul>
               </div>
-          </div>
+          </nav>
         </script>
 
         <!-- Index -->
@@ -76,7 +76,7 @@
                 <div class="section">
                   <div class="container">
                     <div class="jumbotron">
-                      <p>Desenvolva ideias interdisciplinares na UFRJ</p>
+                      <p>Desenvolva ideias interdisciplinares na UFRJ através da comunidade</p>
                       <p>
                         <a href="#register" class="btn btn-primary btn-large">
                           Cadastre-se
