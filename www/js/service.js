@@ -29,10 +29,12 @@ var BackendService = function( config ) {
 
     this.userRegistered = function () {
         console.log('REGISTROU CARAIO');
+        window.location = '#login';
     };
 
     this.gotErrorRegister = function() {
         console.log('FOI NÃO');
+        alert('Não foi possivel registrar');
     };
 
     this.registerUser = function ( userData ) {
@@ -82,6 +84,10 @@ var BackendService = function( config ) {
             return false;
         }
         Backendless.UserService.login(userData.login, userData.password, userData.remember, new Backendless.Async( self.userLoginCallbackGenerator( success ), failure ) );
+    };
+
+    this.isUserLoggedIn = function () {
+        return Backendless.UserService.isValidLogin();
     };
 
     this.userLoginCallbackGenerator = function userLoginCallbackGenerator( callback ) {
