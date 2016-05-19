@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <meta charset="utf-8">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/nprogress.css" rel="stylesheet">
+        <link href="css/custom.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <title>uni.co</title>
+    </head>
+    <body>
+        <!-- Barra de navegação - USAR COMO {{> appHeader}} -->
+        <script type="text/template" id="head-navbar">
+            <div class="navbar navbar-inverse">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href=""><span>uni.co</span></a>
+              </div>
+              <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                  {{#unless authuser}}
+                  <li {{#if vRegistration }}class="active"{{/if}}>
+                    <a href="#register">Cadastro</a>
+                  </li>
+                  <li {{#if vProjetos }}class="active"{{/if}}>
+                    <a href="#projetos">Projetos</a>
+                  </li>
+                  <li {{#if vLogin }}class="active"{{/if}}>
+                    <a href="#login">Entrar</a>
+                  </li>
+                  {{/unless}}
+                  {{#if authuser}}
+                  <li {{#if vProjetos }}class="active"{{/if}}>
+                    <a href="#projetos">Projetos</a>
+                  </li>
+                  <li {{#if vDashboard }}class="active"{{/if}}>
+                    <a href="#dashboard">Meu Perfil</a>
+                  </li>
+                  <li {{#if vNewProject }}class="active"{{/if}}>
+                    <a href="#new-project">Criar Projeto</a>
+                  </li>
+                  <li>
+                    <a href="#logout">Sair</a>
+                  </li>
+                  {{/if}}
+                </ul>
+              </div>
+          </div>
+        </script>
+
+        <!-- Index -->
+        <script type="text/template" id="main">
+        {{> appHeader }}
+        <div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                    <div class="jumbotron">
+                      <p>Desenvolva ideias interdisciplinares na UFRJ</p>
+                      <p>
+                        <a href="#register" class="btn btn-primary btn-large">
+                          Cadastre-se
+                        </a>
+                      </p>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                      <h1 class="trio-title"><small>Veja algumas das ideias compartilhadas:</small></h1>
+                      </div>
+                      {{#each projects}}
+                      {{> ProjectCard }}
+                      {{/each}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </script>
+
+        <!-- Project Card -->
+        <script type="text/template" id="project-card">
+            <div class="col-md-4">
+            <!-- <img alt="50%" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive"> -->
+            <h2><a href="#project/{{id}}">{{{title}}}</a></h2>
+            <p>{{{description}}}</p>
+          </div>
+        </script>
+
+        <!-- Project box -->
+        <script type="text/template" id="project-box">
+          <div class="col-lg-6">
+            <a class="dashboard dashboard-v2 blue" href="#project/{{id}}">
+              <div class="visual">
+                  <i class="fa fa-lightbulb-o"></i>
+              </div>
+              <div class="details">
+                  <div class="number">
+                      <span data-counter="counterup">{{{title}}}</span>
+                  </div>
+                  <div class="desc"><span class="fa fa-tag"></span> {{{habilidades}}}</div>
+              </div>
+            </a>
+          </div>
+        </script>
+
+        <!-- User Card - USAR COMO {{> userCard }}-->
+        <script type="text/template" id="user-card">
+          <div class="col-xg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="media memberfix">
+              <div class="media-left">
+                <a href="#user">
+                  <img class="media-object circular" src="../images/chuck.jpg" alt="Avatar"/>
+                </a>
+              </div>
+              <div class="media-body media-role-fix">
+                <h5 class="media-heading">
+                  Fulano de Tal
+                </h5>
+                <h6>Programador</h6>
+              </div>
+            </div>
+          </div>
+        </script>
+
+        <!-- Checkboxes Habilidades - USAR COMO {{> skillsCheckboxes }} -->
+        <script type="text/template" id="skills-checkboxes">
+        <span class="input-group-addon" id="basic-addon1">{{#unless title}} Habilidades{{/unless}}{{title}}</span>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Programação" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Programação</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Contabilidade" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Contabilidade</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Arquitetura" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Arquitetura</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Administração" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Administração</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Física" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Física</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Quimica" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Quimica</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Matematica" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Matematica</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Medicina" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Medicina</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Comunicação" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Comunicação</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Letras" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Letras</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Direito" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Direito</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input name="skills" value="Sociologia" type="checkbox" aria-label="...">
+                </span>
+                <span class="form-control">Sociologia</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 form-space"></div>
+        </script>
+
+        <!-- Checkboxes Interesses - USAR COMO {{> interestsCheckboxes }} -->
+        <script type="text/template" id="interests-checkboxes">
+          <span class="input-group-addon" id="basic-addon1">{{#unless title}}Interesses{{/unless}}{{title}}</span>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Mobilidade" aria-label="...">
+                </span>
+                <span class="form-control">Mobilidade</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Educação" aria-label="...">
+                </span>
+                <span class="form-control">Educação</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Gastronomia" aria-label="...">
+                </span>
+                <span class="form-control">Gastronomia</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Pesquisas" aria-label="...">
+                </span>
+                <span class="form-control">Pesquisas</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Artes" aria-label="...">
+                </span>
+                <span class="form-control">Artes</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Animais" aria-label="...">
+                </span>
+                <span class="form-control">Animais</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Saúde" aria-label="...">
+                </span>
+                <span class="form-control">Saúde</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Cultura" aria-label="...">
+                </span>
+                <span class="form-control">Cultura</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Viagens" aria-label="...">
+                </span>
+                <span class="form-control">Viagens</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Linguistica" aria-label="...">
+                </span>
+                <span class="form-control">Linguistica</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Esportes" aria-label="...">
+                </span>
+                <span class="form-control">Esportes</span>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="interests" value="Política" aria-label="...">
+                </span>
+                <span class="form-control">Política</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 form-space"></div>
+        </script>
+
+        <!-- Login -->
+        <script type="text/template" id="login">
+        {{> appHeader }}
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                  <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <div class="well">
+                        <div class="input-group form-space">
+                          <span class="input-group-addon" id="basic-addon1">Login</span>
+                          <input name="login" type="input" class="form-control" required placeholder="usuario@email.com" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="form-space input-group">
+                          <span class="input-group-addon" id="basic-addon1">Senha</span>
+                          <input name="pwd" type="password" class="form-control" required placeholder="minhasenh@" aria-describedby="basic-addon2">
+                        </div>
+                        <div>
+                          <button type="button" class="btn btn-success">Login com Siga</button>
+                          <a id="login-btn" class="pull-right btn btn-primary">Login</a>
+                        </div>
+                    </div>
+                  </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </script>
+
+        <!-- Perfil Main -->
+        <script type="text/template" id="perfil">
+        {{> appHeader }}
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section">
+                <div class="container">
+                  <div class="col-lg-12">
+                    <div class="col-lg-3">
+                    <a  class="thumbnail">
+                      <img src="../images/wesley.png"/>
+                    </a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation" {{#if dashboard}}class="active"{{/if}}><a href="#dashboard">Inicio</a></li>
+                        <li role="presentation" {{#if myprojects}}class="active"{{/if}}><a href="#my-projects">Meus Projetos<span class="pull-right badge">1</span></a></li>
+                        <li role="presentation" {{#if inscricoes}}class="active"{{/if}}><a href="#inscricoes">Minhas Inscricoes<span class="pull-right badge">2</span></a></li>
+                        <li role="presentation" {{#if mensagens}}class="active"{{/if}}><a href="#mensagens">Mensagens<span class="pull-right badge">5</span></a></li>
+                        <li role="presentation" {{#if editprofile}}class="active"{{/if}}><a href="#edit-profile">Editar Perfil</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-lg-8">
+                    {{{context}}}
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </script>
+
+        <!-- Perfil DashBoard-->
+        <script type="text/template" id="dashboard">
+          <h1 class="page-title">Sugestões</br><small>O que temos para você!!</small></h1>
+          <div class="row">
+          <div class="col-lg-6">
+            <a class="dashboard dashboard-v2 blue" href="#project">
+                <div class="visual">
+                    <i class="fa fa-lightbulb-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup"> Redução da Fila do Bandeijão </span>
+                    </div>
+                    <div class="desc"><span class="fa fa-tag"></span> Qualdidade de vida, Alimentacao, Software...</div>
+
+                </div>
+            </a>
+          </div>
+          <div class="col-lg-6">
+            <a class="dashboard dashboard-v2 blue" href="#project">
+                <div class="visual">
+                    <i class="fa fa-lightbulb-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup"> Festa de Recepção do Caeng </span>
+                    </div>
+                    <div class="desc"><span class="fa fa-tag"></span> Cultura, Integração, Social...</div>
+                </div>
+            </a>
+          </div>
+          <div class="col-lg-6">
+            <a class="dashboard dashboard-v2 blue" href="#project">
+                <div class="visual">
+                    <i class="fa fa-lightbulb-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup">Iniciação Cientifica no Laboratório ABC</span>
+                    </div>
+                    <div class="desc"><span class="fa fa-tag"></span>  Engenharia Civil, Autocad... </div>
+                </div>
+            </a>
+          </div>
+          <div class="col-lg-6">
+            <a class="dashboard dashboard-v2 blue" href="#project">
+                <div class="visual">
+                    <i class="fa fa-lightbulb-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup">Hackathon 2017 </span>
+                    </div>
+                    <div class="desc"><span class="fa fa-tag"></span>  Todos </div>
+                </div>
+            </a>
+          </div>
+          <div class="col-lg-6">
+            <a class="dashboard dashboard-v2 blue" href="#project">
+                <div class="visual">
+                    <i class="fa fa-lightbulb-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup">Aula auxiliar de Calculo I</span>
+                    </div>
+                    <div class="desc"><span class="fa fa-tag"></span>  Pre-calculo </div>
+                </div>
+            </a>
+          </div>
+          <div class="col-lg-6">
+            <a class="dashboard dashboard-v2 blue" href="#project">
+                <div class="visual">
+                    <i class="fa fa-lightbulb-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup">Projeto de Mobilidade Academica</span>
+                    </div>
+                    <div class="desc"><span class="fa fa-tag"></span> Software para mobile, Arquitetura, Design... </div>
+                </div>
+            </a>
+          </div>
+          </div>
+        </script>
+
+        <!-- Menu Projetos-->
+        <script type="text/template" id="projetos">
+        {{> appHeader }}
+        <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section">
+              <div class="container">
+              <h1 class="page-title">Encontre um projeto</br><small>Faça parte de um projeto que tem a sua cara</small></h1>
+                <div class="col-lg-3 row pull-right input-group" style="margin-right:15px; margin-bottom: 10px;">
+                  <input type="text" class="form-control" placeholder="Busca por titulo, areas e/ou tags" aria-describedby="basic-addon2">
+                  <span class="input-group-addon" id="basic-addon2">Busca</span>
+                </div>
+                <div class="col-lg-12">
+                  <div class="row">
+                    {{#each projects}}
+                    {{> ProjectBox }}
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </script>
+
+        <!-- Perfil Meus Projetos-->
+        <script type="text/template" id="my-projects">
+          <h1 class="page-title">Projetos<a href="#new-project" class="btn btn-small btn-success pull-right">+</a></br><small>Os projetos criados por você</small></h1>
+          <div class="row">
+          <div class="col-lg-12">
+            <a class="dashboard dashboard-v2 yellow" href="#project">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup"> Hackathon SE 2016 </span>
+                    </div>
+                    <div class="desc"><span class="fa fa-tag"></span> Todos</div>
+                </div>
+            </a>
+          </div>
+        <div>
+        </script>
+
+        <!-- Perfil Minhas Inscricoes-->
+        <script type="text/template" id="inscricoes">
+          <h1 class="page-title">Inscrições<a href="#projetos" class="btn btn-small fa fa-search btn-success pull-right">+</a></br><small>Os projetos ao qual você se inscreveu!!</small></h1>
+          <div class="row">
+          <div class="col-lg-12">
+            <a class="dashboard dashboard-v2 green" href="#project">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup">SE 2017</span>
+                    </div>
+                    <div class="desc"><span class="fa fa-tag"></span> Todos</div>
+                </div>
+            </a>
+          </div>
+          <div class="col-lg-12">
+            <a class="dashboard dashboard-v2 red" href="#project">
+                <div class="visual">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        <span data-counter="counterup" data-value="120">Aula de Reforço para Fisica II</span>
+                    </div>
+                    <div class="desc"><span class="fa fa-tag"></span> Calculo I, Física I, Calculo II</div>
+                </div>
+            </a>
+          </div>
+        <div>
+        </script>
+
+        <!-- Perfil Mensagens-->
+        <script type="text/template" id="mensagens">
+          <h1 class="page-title">Inbox</br><small>Minhas mensagens!!</small></h1>
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Hackathon SE 2016 - To Dentro!!</h4>
+              <p class="list-group-item-text"><span class="fa fa-user"> Igor A. Silva</span></p>
+            </a>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Hackathon SE 2016 - To Dentro!</h4>
+              <p class="list-group-item-text"><span class="fa fa-user"> Varlen P. Neto</span></p>
+            </a>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Hackathon SE 2016 - To Dentro!</h4>
+              <p class="list-group-item-text"><span class="fa fa-user"> Eduardo Saul</span></p>
+            </a>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Hackathon SE 2016 - To Dentro!</h4>
+              <p class="list-group-item-text"><span class="fa fa-user"> Bruno Barcellos</span></p>
+            </a>
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Hackathon SE 2016 - To Dentro!</h4>
+              <p class="list-group-item-text"><span class="fa fa-user"> Vitor Coelho</span></p>
+            </a>
+          </div>
+          <nav>
+            <ul class="pagination">
+              <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
+            </ul>
+          </nav>
+        </script>
+
+        <!-- Perfil Editar -->
+        <script type="text/template" id="edit-profile">
+          <h1 class="page-title">Preferencias</br><small>Defina as suas preferencias e competencias!!</small></h1>
+          {{> skillsCheckboxes }}
+          {{> interestsCheckboxes }}
+          <button id="reg-btn" type="button" class="pull-right btn btn-primary">Update</button>
+        </script>
+
+        <!-- Cadastro de Usuário -->
+        <script type="text/template" id="user-registration">
+        {{> appHeader }}
+        <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section">
+              <div class="container">
+                <div class="row">
+                  <div class="form-space col-md-12">
+                    <div class="input-group form-space">
+                      <span class="input-group-addon" id="basic-addon1">Nome</span>
+                      <input name="user_name"type="text" class="form-control" required placeholder="Nome Completo" aria-describedby="basic-addon1">
+                      <span class="input-group-addon" id="basic-addon1">Senha</span>
+                      <input type="password" class="form-control" required placeholder="Senha" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="form-space input-group">
+                      <span class="input-group-addon" id="basic-addon1">Matricula</span>
+                      <input name="user_matricula" type="text" class="form-control" required placeholder="Numero de Matricula, DRE ..." aria-describedby="basic-addon2">
+                      <span class="input-group-addon" id="basic-addon1">Vínculo</span>
+                      <input name="user_vinculo" type="text" class="form-control" required placeholder="Aluno/Professor/Funcionário" aria-describedby="basic-addon2">
+                      <span class="input-group-addon" id="basic-addon1">Curso</span>
+                      <input name="user_curso" type="text" class="form-control" placeholder="Curso Matriculado" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="form-space input-group">
+                      <span class="input-group-addon" id="basic-addon1">Telefone</span>
+                      <input name="user_telefone" type="text" class="form-control" placeholder="(XX)XXXX-XXXX" aria-describedby="basic-addon3">
+                      <span class="input-group-addon" id="basic-addon1">Celular</span>
+                      <input name="user_celular" type="text" class="form-control" required placeholder="(XX)XXXXX-XXXX" aria-describedby="basic-addon3">
+                      <span class="input-group-addon" id="basic-addon1">Email</span>
+                      <input name="user_email" type="text" class="form-control" required placeholder="Seu email de contato utilizado no login" aria-describedby="basic-addon3">
+                    </div>
+                    {{> skillsCheckboxes }}
+                    {{> interestsCheckboxes }}
+                    <button id="reg-btn" type="button" class="pull-right btn btn-primary">Registrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </script>
+
+        <!-- Pagina de Usuario -->
+        <script type="text/template" id="user-page">
+          {{> appHeader }}
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section">
+                  <div class="container">
+                    <div class="col-sm-12">
+                      <div class="col-md-3">
+                      <img src="../images/chuck.jpg" class="circular-big">
+                      <h3>Fulano de Tal da Silva Souza</h3>
+                      <h4>Estudante/Campus Fundão</h4>
+                      <h4>Programador</h4>
+                      <ul class="nav nav-pills nav-stacked usr-actions">
+                        <li role="presentation" ><a href="">Enviar Mensagem</a></li>
+                        <li role="presentation" ><a href="">Página Web</a></li>
+                      </ul>
+                      </div>
+                      <div class="col-md-9 smooth-border-left">
+                        <h4 class="bluish">Habilidades</h4>
+                        <div class="content">
+                          Programação, Contabilidade, Quimica
+                        </div>
+                        <h4 class="bluish">Interesses</h4>
+                        <div class="content">
+                          Educação, Artes, Gastronomia
+                        </div>
+                        <h4 class="bluish">Projetos</h4>
+                        <div class="content">
+                          <div class="row">
+                          <div class="col-md-6">
+                          <a class="dashboard dashboard-v2 blue" href="#project">
+                              <div class="visual">
+                                  <i class="fa fa-globe"></i>
+                              </div>
+                              <div class="details">
+                                  <div class="number">
+                                      <span data-counter="counterup"> Hackathon SE 2016 </span>
+                                  </div>
+                                  <div class="desc"><span class="fa fa-tag"></span> Interdisciplinar</div>
+                              </div>
+                          </a>
+                        </div>
+                         <div class="col-md-6">
+                          <a class="dashboard dashboard-v2 blue" href="#project">
+                              <div class="visual">
+                                  <i class="fa fa-globe"></i>
+                              </div>
+                              <div class="details">
+                                  <div class="number">
+                                      <span data-counter="counterup"> Hackathon SE 2016 </span>
+                                  </div>
+                                  <div class="desc"><span class="fa fa-tag"></span> Interdisciplinar</div>
+                              </div>
+                          </a>
+                        </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </script>
+
+        <!-- Cadastro de Projeto -->
+        <script type="text/template" id="project-registration">
+          {{> appHeader }}
+          <div class="container">
+            <h2>Crie um novo projeto</h2>
+            <h4>Falta pouco para empreender</h4>
+              <label for="project-name">Nome</label>
+              <input name="project-name" type="text" class="form-control" required placeholder="Nome do projeto" aria-describedby="basic-addon2">
+              <label for="project-desc">Descrição</label>
+              <textarea name="project-desc" rows="5" multiline="true" class="form-control" placeholder="Descreva o projeto para a comunidade" aria-describedby="basic-addon2"></textarea>
+              <br>
+              {{> skillsCheckboxes title="Habilidades Desejadas"}}
+              {{> interestsCheckboxes title="Áreas de Interesse/Abrangência"}}
+              <a class="pull-right btn btn-primary btn-large" id="#btn-prjreg">Criar</a>
+          </div>
+        </script>
+
+        <!-- Pagina do Projeto -->
+        <script type="text/template" id="project-page">
+            {{> appHeader }}
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="section">
+                    <div class="container">
+                      <div class="row">
+                      <div class="col-md-8">
+                      <h2>{{Nome}}</h2>
+                      <p>{{Descricao}}</p>
+                      </div>
+                      <div class="col-md-4 smooth-border-left">
+
+                      <h4>Criado por: </h4>
+                      <div class="media memberfix">
+                      <div class="media-left">
+                        <a href="#user">
+                          <img class="media-object circular" src="../images/wesley.png" alt="Avatar"/>
+                        </a>
+                      </div>
+                      <div class="media-body media-role-fix">
+                        <h5 class="media-heading">
+                          Você
+                        </h5>
+                        <h6>Aluno da UFRJ</h6>
+                      </div>
+                    </div>
+                      </div>
+                      </div>
+                      <hr>
+                    </div>
+                    <div class="container">
+                    <div class="col-md-4">
+                      <h4>Abragência</h4>
+                      <p>{{Interesses}}</p>
+                      <h4>Habilidades</h4>
+                      <p>{{Habilidades}}</p>
+                    </div>
+                    <div class="col-md-4" style="text-align: center;">
+                      <h4>E aí? Gostou?</h4>
+                      <a class="btn btn-primary btn-large">Gostei</a>
+                      <a class="btn btn-primary btn-large">Tô Dentro!</a>
+                      <a class="btn btn-primary btn-large">Compartilhar</a>
+                    </div>
+
+                    <div class="col-md-4"></div>
+                    </div>
+                    <div class="container">
+                    <br>
+                    <h4>Estão neste projeto: </h4>
+                      <div class="row">
+                        {{> userCard }}
+                        {{> userCard }}
+                        {{> userCard }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </script>
+
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- External Libraries -->
+        <script type="text/javascript" src="bower_components/handlebars/handlebars.js"></script>
+        <script type="text/javascript" src="bower_components/backendless/libs/backendless.js"></script>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="js/Project.js"></script>
+        <script type="text/javascript" src="js/nprogress.js"></script>
+        <script type="text/javascript" src="js/router.js"></script>
+        <script type="text/javascript" src="js/service.js"></script>
+        <script type="text/javascript" src="js/checkbox.js"></script>
+        <!-- Views -->
+        <script type="text/javascript" src="js/views/MainView.js"></script>
+        <script type="text/javascript" src="js/views/LoginView.js"></script>
+        <script type="text/javascript" src="js/views/RegistrationView.js"></script>
+        <script type="text/javascript" src="js/views/ProfileView.js"></script>
+        <script type="text/javascript" src="js/views/UserView.js"></script>
+        <script type="text/javascript" src="js/views/ProjectView.js"></script>
+        <script type="text/javascript" src="js/views/ProjetosView.js"></script>
+        <script type="text/javascript" src="js/views/ProjectRegistrationView.js"></script>
+
+        <!-- App script -->
+        <script type="text/javascript" src="js/index.js"></script>
+
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    </body>
+</html>
