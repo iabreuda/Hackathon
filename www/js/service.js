@@ -69,6 +69,10 @@ var BackendService = function( config ) {
         Backendless.Persistence.of( Project ).findById( id , new Backendless.Async( success, fetchError ));
     };
 
+    this.retrieveProjectSync = function( id ) {
+        return Backendless.Persistence.of( Project ).findById( id );
+    };
+
     this.loginUser = function ( userData, success, failure ) {
         if ( userData.login == "" || userData.password == "" ){
             return false;
