@@ -89,6 +89,23 @@
           </div>
         </script>
 
+        <!-- Project box -->
+        <script type="text/template" id="project-box">
+          <div class="col-lg-6">
+            <a class="dashboard dashboard-v2 blue" href="#project/{{id}}">
+              <div class="visual">
+                  <i class="fa fa-lightbulb-o"></i>
+              </div>
+              <div class="details">
+                  <div class="number">
+                      <span data-counter="counterup">{{{title}}}</span>
+                  </div>
+                  <div class="desc"><span class="fa fa-tag"></span> {{{habilidades}}}</div>
+              </div>
+            </a>
+          </div>
+        </script>
+
         <!-- User Card - USAR COMO {{> userCard }}-->
         <script type="text/template" id="user-card">
           <div class="col-xg-3 col-md-4 col-sm-6 col-xs-12">
@@ -491,94 +508,9 @@
                 </div>
                 <div class="col-lg-12">
                   <div class="row">
-                    <div class="col-lg-6">
-                      <a class="dashboard dashboard-v2 blue" href="#project">
-                        <div class="visual">
-                            <i class="fa fa-lightbulb-o"></i>
-                        </div>
-                        <div class="details">
-                            <div class="number">
-                                <span data-counter="counterup">Reducao da Fila do Bandejao</span>
-                            </div>
-                            <div class="desc"><span class="fa fa-tag"></span> Qualdidade de vida, Alimentacao, Software...</div>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="col-lg-6">
-                      <a class="dashboard dashboard-v2 blue" href="#project">
-                          <div class="visual">
-                              <i class="fa fa-lightbulb-o"></i>
-                          </div>
-                          <div class="details">
-                              <div class="number">
-                                  <span data-counter="counterup"> Festa de Recepcao do Caeng </span>
-                              </div>
-                              <div class="desc"><span class="fa fa-tag"></span> Cultura, Integracao, Social...</div>
-                          </div>
-                      </a>
-                    </div>
-                    <div class="col-lg-6">
-                      <a class="dashboard dashboard-v2 blue" href="#project">
-                          <div class="visual">
-                              <i class="fa fa-lightbulb-o"></i>
-                          </div>
-                          <div class="details">
-                              <div class="number">
-                                  <span data-counter="counterup">Iniciacao Cientifica no Laboratorio ABC</span>
-                              </div>
-                              <div class="desc"><span class="fa fa-tag"></span>  Engenharia Civil, Autocad... </div>
-                          </div>
-                      </a>
-                    </div>
-                    <div class="col-lg-6">
-                      <a class="dashboard dashboard-v2 blue" href="#project">
-                          <div class="visual">
-                              <i class="fa fa-lightbulb-o"></i>
-                          </div>
-                          <div class="details">
-                              <div class="number">
-                                  <span data-counter="counterup">Hackathon 2017 </span>
-                              </div>
-                              <div class="desc"><span class="fa fa-tag"></span>  Todos </div>
-                          </div>
-                      </a>
-                    </div>
-                    <div class="col-lg-6">
-                      <a class="dashboard dashboard-v2 blue" href="#project">
-                          <div class="visual">
-                              <i class="fa fa-lightbulb-o"></i>
-                          </div>
-                          <div class="details">
-                              <div class="number">
-                                  <span data-counter="counterup">Aula auxiliar de Calculo I</span>
-                              </div>
-                              <div class="desc"><span class="fa fa-tag"></span>  Pre-calculo </div>
-                          </div>
-                      </a>
-                    </div>
-                    <div class="col-lg-6">
-                      <a class="dashboard dashboard-v2 blue" href="#project">
-                          <div class="visual">
-                              <i class="fa fa-lightbulb-o"></i>
-                          </div>
-                          <div class="details">
-                              <div class="number">
-                                  <span data-counter="counterup">Projeto de Mobilidade Academica</span>
-                              </div>
-                              <div class="desc"><span class="fa fa-tag"></span> Software para mobile, Arquitetura, Design... </div>
-                          </div>
-                      </a>
-                    </div>
-                    <nav>
-                      <ul class="pagination pull-right" style="margin-right: 15px">
-                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
-                      </ul>
-                    </nav>
+                    {{#each projects}}
+                    {{> ProjectBox }}
+                    {{/each}}
                   </div>
                 </div>
               </div>
