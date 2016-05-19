@@ -43,7 +43,7 @@
                   <li {{#if vProjetos }}class="active"{{/if}}>
                     <a href="#projetos">Projetos</a>
                   </li>
-                  <li>
+                  <li {{#if vLogin }}class="active"{{/if}}>
                     <a href="#login">Entrar</a>
                   </li>
                   {{/unless}}
@@ -774,8 +774,29 @@
                 <div class="col-md-12">
                   <div class="section">
                     <div class="container">
+                      <div class="row">
+                      <div class="col-md-8">
                       <h2>{{Nome}}</h2>
                       <p>{{Descricao}}</p>
+                      </div>
+                      <div class="col-md-4 smooth-border-left">
+
+                      <h4>Criado por: </h4>
+                      <div class="media memberfix">
+                      <div class="media-left">
+                        <a href="#user">
+                          <img class="media-object circular" src="../images/wesley.png" alt="Avatar"/>
+                        </a>
+                      </div>
+                      <div class="media-body media-role-fix">
+                        <h5 class="media-heading">
+                          Você
+                        </h5>
+                        <h6>Aluno da UFRJ</h6>
+                      </div>
+                    </div>
+                      </div>
+                      </div>
                       <hr>
                     </div>
                     <div class="container">

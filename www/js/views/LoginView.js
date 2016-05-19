@@ -3,7 +3,7 @@ var LoginView = function (service) {
     self = this;
 
     this.render = function renderLoginView() {
-        this.$el.html(this.template());
+        this.$el.html(this.template({ vLogin: true }));
         NProgress.done();
         return this;
     };
