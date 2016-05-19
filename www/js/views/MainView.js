@@ -17,7 +17,7 @@ var MainView = function (service) {
         projects[i] = {id: rand.objectId, title: rand.Nome, description: rand.Descricao };
       };
 
-      this.$el.html(this.template({"projects": projects}));
+      this.$el.html(this.template({"authuser": service.isUserLoggedIn() ,"projects": projects}));
       return this;
     };
 

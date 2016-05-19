@@ -1,7 +1,7 @@
 var UserView = function (service) {
 
     this.render = function renderUserView() {
-        this.$el.html(this.template());
+        this.$el.html(this.template({ "authuser": service.isUserLoggedIn() }));
         return this;
     };
 

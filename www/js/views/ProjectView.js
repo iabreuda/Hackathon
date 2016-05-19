@@ -10,7 +10,9 @@ var ProjectView = function ( service, id ) {
     };
 
     this.render = function renderProjectView( data ) {
-        this.$el.html(this.template( self.data ));
+        var tData = {};
+        $.extend(tData, self.data, {"authuser": service.isUserLoggedIn()} );
+        this.$el.html(this.template( tData ));
         NProgress.done();
         return this;
     };
