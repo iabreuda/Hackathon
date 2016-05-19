@@ -9,6 +9,7 @@ var RegistrationView = function (service) {
 
     this.initialize = function() {
        // Define a div wrapper for the view ( used to attach events )
+       self = this;
        this.$el = $('<div/>');
        //debugger;
 
@@ -19,7 +20,7 @@ var RegistrationView = function (service) {
        //
         $( this.$el ).on('click', function( evt ) {
           if ( evt.target.id == "reg-btn" ) {
-            //self.registerUser();
+            self.registerUser();
             console.log( 'btn' );
           }
        });
@@ -41,6 +42,9 @@ var RegistrationView = function (service) {
       };
       var success = function success ( info ) {
         window.location = "#dashboard";
+      };
+      var failure = function failure ( err ) {
+        console.log( err );
       };
       service.registerUser( userData, success, failure );
 
