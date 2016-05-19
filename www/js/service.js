@@ -73,6 +73,10 @@ var BackendService = function( config ) {
         return Backendless.Persistence.of( Project ).findById( id );
     };
 
+    this.retrieveAllProject = function() {
+        return Backendless.Persistence.of( Project ).find();
+    };
+
     this.loginUser = function ( userData, success, failure ) {
         if ( userData.login == "" || userData.password == "" ){
             return false;
