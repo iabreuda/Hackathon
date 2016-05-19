@@ -32,10 +32,11 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href=""><span>Chega mais UFRJ</span></a>
+                <a class="navbar-brand" href=""><span>uni.co</span></a>
               </div>
               <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                 <ul class="nav navbar-nav navbar-right">
+                  {{#unless authuser}}
                   <li>
                     <a href="#register">Cadastro</a>
                   </li>
@@ -45,6 +46,18 @@
                   <li>
                     <a href="#login">Entrar</a>
                   </li>
+                  {{/unless}}
+                  {{#if authuser}}
+                  <li>
+                    <a href="#projetos">Projetos</a>
+                  </li>
+                  <li>
+                    <a href="#dashboard">Meus Perfil</a>
+                  </li>
+                  <li>
+                    <a href="#logout">Sair</a>
+                  </li>
+                  {{/if}}
                 </ul>
               </div>
           </div>
@@ -504,7 +517,7 @@
           <div class="col-md-12">
             <div class="section">
               <div class="container">
-              <h1 class="page-title">Encontre um projeto</br><small>Faca parte de um projeto que tenha a sua cara</small></h1>
+              <h1 class="page-title">Encontre um projeto</br><small>Faça parte de um projeto que tem a sua cara</small></h1>
                 <div class="col-lg-3 row pull-right input-group" style="margin-right:15px; margin-bottom: 10px;">
                   <input type="text" class="form-control" placeholder="Busca por titulo, areas e/ou tags" aria-describedby="basic-addon2">
                   <span class="input-group-addon" id="basic-addon2">Busca</span>
