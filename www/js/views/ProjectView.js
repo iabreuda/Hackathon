@@ -11,6 +11,7 @@ var ProjectView = function ( service, id ) {
 
     this.render = function renderProjectView( data ) {
         this.$el.html(this.template( self.data ));
+        NProgress.done();
         return this;
     };
 
